@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
     resource :users, only: [:create]
     resources :menus, only: [:create, :index]
+    resources :votes, only: [:create, :index]
   end
 end

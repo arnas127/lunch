@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807202951) do
+ActiveRecord::Schema.define(version: 20170807203511) do
 
   create_table "menus", force: :cascade do |t|
     t.text "meals", null: false
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20170807202951) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.index ["token"], name: "index_users_on_token"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.integer "menu_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_votes_on_employee_id"
+    t.index ["menu_id"], name: "index_votes_on_menu_id"
   end
 
 end
