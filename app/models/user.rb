@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   TYPES = %w(Admin Restaurant Employee)
 
-  validates :account_type, inclusion: { in: TYPES, message: 'is not a valid type' }, on: :create
+  validates :account_type, inclusion: { in: TYPES, message: 'is not a valid type' }, on: :create, if: -> { type.blank? }
   validates :password, length: { minimum: 8 }, on: :create
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, uniqueness: true
 
@@ -35,6 +35,6 @@ class User < ApplicationRecord
   private
 
   def assign_type
-    self.type = account_type
+    self.type ||= account_type
   end
 end

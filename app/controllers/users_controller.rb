@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
+  include ApiResponseConcern
+
   before_action :require_admin, only: [:create]
 
   def create
     new_user = User.new(user_params)
-    if new_user.save
-      head :ok
-    else
-      render json: { errors: new_user.errors.messages }, status: :unprocessable_entity
-    end
+    render_resource_response(new_user)
   end
 
   private
